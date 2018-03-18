@@ -1,0 +1,6 @@
+/.dotfiles
+/.bundle
+/.cache
+/.npm
+/.ssh/id_*
+

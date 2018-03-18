@@ -1,0 +1,27 @@
+[core]
+  autocrlf = false 
+  # fileMode = false
+
+[user]
+	email = straightshoota@gmail.com
+  name = Johannes Müller
+
+[push]
+  default = simple
+
+[alias]
+  cm = commit -m
+  fix = commit --fixup
+
+[log]
+  decorate = auto
+
+[pull]
+  rebase = true
+
+[rebase]
+  autoSquash = true
+
+[url "git@github.com:"]
+  pushInsteadOf = git://github.com/
+  pushInsteadOf = https://github.com/
