@@ -1,7 +1,0 @@
-# Dotfiles alias
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-# Git aliases
-alias gaa='git add --all'
-alias gc='git commit'
-alias gca='git commit --amend --date="$(date)"'

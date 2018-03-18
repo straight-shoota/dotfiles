@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+export DEVDIR="/mnt/d/Dokumente/dev"
+export CRDIR="${DEVDIR}/test/crystal"
+
+alias devdir='cd $DEVDIR'
+alias crdir='cd $CRDIR'
