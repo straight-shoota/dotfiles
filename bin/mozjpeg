@@ -1,0 +1,32 @@
+#! /bin/bash -e
+
+file="${1}"
+tmpfile="${2:-"${file}.optimized"}"
+quality="${3:-85}"
+
+function optimize(){
+  orig_size=`stat --printf="%s" "${file}"`
+
+  cjpeg -quality "${1}" -outfile "${tmpfile}" "${file}" 
+
+  new_size=`stat --printf="%s" "${tmpfile}"`
+
+  echo -n "$(numfmt --to=iec-i ${orig_size}) -> $(numfmt --to=iec-i ${new_size}): "
+  echo "$(echo "scale=2; ${new_size} / ${orig_size} * 100" | bc) %"
+
+  if [ $new_size -lt $orig_size ]; then
+    mv "${tmpfile}" "${file}"
+  else
+    echo -n "Optimized file has bigger size. "
+    if [ $quality > 65 ]; then
+      quality=`echo "${quality} - 5" | bc`
+      echo "Trying agin with quality ${quality}..."
+      optimize $quality
+    else
+      echo "Stopping at quality ${quality}"
+      echo "You can look at the optimized file in ${tempfile}"
+    fi
+  fi
+}
+
+optimize $quality

@@ -1,0 +1,10 @@
+#! /bin/bash
+
+for file in `find "${1:-.}" -name \*.jpg -type f`; do
+  echo "$file"
+  orig_size=`stat --printf="%s" "$file"`
+  cjpeg -quality 85 "$file" | sponge "$file"
+  new_size=`stat --printf="%s" "$file"`
+  echo -n "$(numfmt --to=iec-i ${orig_size}) -> $(numfmt --to=iec-i ${new_size}): "
+  echo "scale=2; ${new_size} / ${orig_size}" | bc
+done

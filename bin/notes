@@ -1,0 +1,19 @@
+grep -R -onE '# (TODO|FIXME|BUG|DEPRECATED|INFO|OPTIMIZE):.*' src/ spec/ |\
+sort |\
+awk -F: '\
+{\
+  if (current_file != $1) {\
+    printf("\n\033[1;4m%s\033[0m\n", $1);\
+    current_file = $1;\
+  }\
+\
+  type = substr($3, 3);\
+  match($$0, /#[^:]*: */);\
+  text = substr($0, RSTART + RLENGTH);\
+  printf("  \033[1;30mline %-4d \033[0;32m%-6s\033[0;33m %s\033[0m\n", $2, type, text);\
+\
+  count += 1;\
+}\
+\
+END { printf("\n\033[31m×\033[0;1m %d note comments found\n", count); }\
+'
