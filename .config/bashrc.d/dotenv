@@ -1,3 +1,8 @@
+# Execute `dotenv` in a directory in which `.env` exists to load
+# environment variables into current shell session.
+#
+# Source: https://github.com/builtinnya/dotenv-shell-loader
+
 dotenv () {
   DOTENV_SHELL_LOADER_SAVED_OPTS=$(set +o)
   set -o allexport

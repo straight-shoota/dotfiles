@@ -5,6 +5,10 @@
 [user]
 	email = straightshoota@gmail.com
   name = Johannes Müller
+  signingkey = F0F349637AC5087A
+
+[commit]
+  gpgsign = true
 
 [push]
   default = simple
