@@ -1,0 +1,4 @@
+export VISUAL=vi
+export EDITOR="$VISUAL"
+
+export GPG_TTY=$(tty)
