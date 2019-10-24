@@ -1,11 +1,29 @@
 [core]
   autocrlf = false 
   # fileMode = false
+  whitespace = space-before-tab,trailing-space
 
 [user]
 	email = straightshoota@gmail.com
   name = Johannes Müller
   signingkey = F0F349637AC5087A
+
+[diff]
+  algorithm = histogram
+  renames = copy
+  wordregex = [^[:space:]]
+  mnemonicprefix = true
+  submodule = log
+  tool = meld
+
+[transfer]
+	fsckobjects = true
+
+[fetch]
+	fsckobjects = true
+
+[receive]
+	fsckobjects = true
 
 [commit]
   gpgsign = true
@@ -14,14 +32,20 @@
   default = simple
 
 [alias]
-  cm = commit -m
+  bc  = checkout --no-track -b # don't automatically track the same remote branch
+  cm  = commit -m
+  d   = diff
+  dc  = diff --cached
   fix = commit --fixup
 
 [log]
   decorate = auto
 
 [pull]
-  rebase = true
+  rebase = preserve
+
+[status]
+  branch = true
 
 [rebase]
   autoSquash = true
@@ -29,5 +53,6 @@
 [url "git@github.com:"]
   pushInsteadOf = git://github.com/
   pushInsteadOf = https://github.com/
+
 [gpg]
   program = gpg2
