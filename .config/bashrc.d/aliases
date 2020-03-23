@@ -30,3 +30,23 @@ alias gaa='git add --all'
 alias gc='git commit'
 alias gca='git commit --amend --date="$(date)"'
 alias gcf='git commit --fixup'
+
+alias vault-password='ansible-vault encrypt_string "$(openssl rand -base64 32)"'
+
+vdiff () {
+    if [ "${#}" -ne 2 ] ; then
+        echo "vdiff requires two arguments"
+        echo "  comparing dirs:  vdiff dir_a dir_b"
+        echo "  comparing files: vdiff file_a file_b"
+        return 1
+    fi
+
+    local left="${1}"
+    local right="${2}"
+
+    if [ -d "${left}" ] && [ -d "${right}" ]; then
+        vim +"DirDiff ${left} ${right}"
+    else
+        vim -d "${left}" "${right}"
+    fi
+}
