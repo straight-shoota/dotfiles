@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# MSVC 2015
+# MSVC_BUILD_TOOLS="C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ C++^ Build^ Tools\\vcbuildtools.bat"
+
+# MSVC 2017
+MSVC_BUILD_TOOLS="C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2017\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat"
+MSVC_BUILD_TOOLS="C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2017\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat x64"
+
+# sample: linker_command="cl ${name}.o /Fe${name} advapi32.lib pcre.lib gc.lib libcmt.lib"
+
+linker_command=$@
+linker_command="${linker_command//\"/}"
+
+# user32.lib should not be required but libgc expects it
+linker_command="${linker_command} user32.lib"
+
+exec cmd.exe /S /c "${MSVC_BUILD_TOOLS} amd64 && cd /D %CD% && ${linker_command}"

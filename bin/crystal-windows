@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Catching the result of the program does not play nice with the progress output. Otherwise we could use this:
+# linker_command=$(bin/crystal build --cross-compile --target x86_64-unknown-windows-msvc "${@}")
+# name=$(echo $linker_command | sed -E 's/.*\/Fe([^ "]+).*/\1/')
+
+if [ -f "bin/crystal" ]; then
+  CRYSTAL_BIN=${CRYSTAL_BIN:-bin/crystal}
+else
+  CRYSTAL_BIN=${CRYSTAL_BIN:-crystal}
+fi
+
+linker_command=$($CRYSTAL_BIN build --cross-compile --target x86_64--windows-msvc -Dwithout_zlib -Dwithout_openssl $@)
+output="./$(echo $linker_command | grep -oP '(?<="/Fe)(.*)(?=")').exe"
+
+echo "#"
+echo "# Running linker: $linker_command"
+echo "#"
+
+crystal-windows-link $linker_command
+
+echo "#"
+echo "# Executing $output"
+echo "#"
+
+exec $output
