@@ -1,3 +1,7 @@
-source /usr/local/share/chruby/chruby.sh
+CHRUBY_FILE=/usr/local/share/chruby/chruby.sh
 
-chruby 2.7.0
+if [ -f $CHRUBY_FILE ]; then
+  source $CHRUBY_FILE
+
+  chruby 2.7.0
+fi
