@@ -1,11 +1,5 @@
 #! /usr/bin/env bash
 
-export DEVDIR="/mnt/d/Dokumente/dev"
-export CRDIR="${DEVDIR}/test/crystal"
-
-alias devdir='cd $DEVDIR'
-alias crdir='cd $CRDIR'
-
 # WSL (Windows Subsystem for Linux) specific settings.
 if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
     # Adjustments for WSL's file / folder permission metadata.
@@ -13,11 +7,11 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
       umask 0022
     fi
 
-    # Access local X-server with VcXsrv.
+    # Access X-server on Windows (VcXsrv).
     #   Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-    export DISPLAY=:0
+    export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
 
     # Configure the Docker CLI to use the Docker for Windows daemon.
     #   Requires: https://docs.docker.com/docker-for-windows/install/
-    export DOCKER_HOST=tcp://localhost:2375
+    # export DOCKER_HOST=tcp://localhost:2375
 fi
