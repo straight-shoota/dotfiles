@@ -37,6 +37,7 @@
   d   = diff
   dc  = diff --cached
   fix = commit --fixup
+  s   = status -sb
 
 [log]
   decorate = auto
@@ -56,3 +57,5 @@
 
 [gpg]
   program = gpg2
+[init]
+	templatedir = ~/.config/git/template
