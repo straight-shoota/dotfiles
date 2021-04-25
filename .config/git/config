@@ -32,12 +32,20 @@
   default = simple
 
 [alias]
+  a   = add
+  ap  = '-c interactive.diffFilter="git diff --color-words" add --patch'
+  b   = branch
   bc  = checkout --no-track -b # don't automatically track the same remote branch
+  c   = commit
   cm  = commit -m
+  co  = checkout
   d   = diff
   dc  = diff --cached
   fix = commit --fixup
+  force-push = push --force-with-lease
   s   = status -sb
+  recent = ! git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always | column -ts'|'
+  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 
 [log]
   decorate = auto
