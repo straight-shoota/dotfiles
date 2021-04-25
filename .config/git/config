@@ -20,7 +20,7 @@
 	fsckobjects = true
 
 [fetch]
-	fsckobjects = true
+	fsckobjects = false
 
 [receive]
 	fsckobjects = true
@@ -64,6 +64,5 @@
   pushInsteadOf = https://github.com/
 
 [gpg]
-  program = gpg2
 [init]
 	templatedir = ~/.config/git/template
