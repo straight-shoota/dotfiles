@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # WSL (Windows Subsystem for Linux) specific settings.
-if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+if grep -qiE "(Microsoft|WSL)" /proc/version &>/dev/null; then
     # Adjustments for WSL's file / folder permission metadata.
     if [ "$(umask)" = "0000" ]; then
       umask 0022
@@ -14,4 +14,9 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
     # Configure the Docker CLI to use the Docker for Windows daemon.
     #   Requires: https://docs.docker.com/docker-for-windows/install/
     # export DOCKER_HOST=tcp://localhost:2375
+
+    # This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
+    # up memory, this command will free your memory after about 20-30 seconds.
+    #   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
+    alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 fi
