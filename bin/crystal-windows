@@ -7,13 +7,13 @@ set -euo pipefail
 # name=$(echo $linker_command | sed -E 's/.*\/Fe([^ "]+).*/\1/')
 
 if [ -f "bin/crystal" ]; then
-  CRYSTAL_BIN=${CRYSTAL_BIN:-bin/crystal}
+  CRYSTAL=${CRYSTAL:-bin/crystal}
 else
-  CRYSTAL_BIN=${CRYSTAL_BIN:-crystal}
+  CRYSTAL=${CRYSTAL:-crystal}
 fi
 
-linker_command=$($CRYSTAL_BIN build --cross-compile --target x86_64--windows-msvc -Dwithout_zlib -Dwithout_openssl $@)
-output="./$(echo $linker_command | grep -oP '(?<="/Fe)(.*)(?=")').exe"
+linker_command="$($CRYSTAL build --cross-compile --target x86_64--windows-msvc -Dwithout_zlib -Dwithout_openssl --link-flags="/Z7" $@)"
+output="./$(echo "$linker_command" | grep -oP '(?<=/Fe)([^ ]*)').exe"
 
 echo "#"
 echo "# Running linker: $linker_command"

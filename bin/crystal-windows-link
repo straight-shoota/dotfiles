@@ -9,6 +9,9 @@ set -euo pipefail
 MSVC_BUILD_TOOLS="C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2017\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat"
 MSVC_BUILD_TOOLS="C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2017\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat x64"
 
+# MSVC 2019
+MSVC_BUILD_TOOLS="D:\\bin\\Microsoft^ Visual^ Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"
+
 # sample: linker_command="cl ${name}.o /Fe${name} advapi32.lib pcre.lib gc.lib libcmt.lib"
 
 linker_command=$@
@@ -17,4 +20,11 @@ linker_command="${linker_command//\"/}"
 # user32.lib should not be required but libgc expects it
 linker_command="${linker_command} user32.lib"
 
-exec cmd.exe /S /c "${MSVC_BUILD_TOOLS} amd64 && cd /D %CD% && ${linker_command}"
+mv *.obj /mnt/d/crystal/
+pushd /mnt/d/crystal/
+
+cmd.exe /S /c "${MSVC_BUILD_TOOLS} amd64 && cd /D %CD% && ${linker_command}"
+
+popd
+
+mv /mnt/d/crystal/*.exe .
