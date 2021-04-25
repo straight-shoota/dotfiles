@@ -9,3 +9,5 @@ export LESS_TERMCAP_so="$(printf '%b' '')"; a="${a%_}"
 export LESS_TERMCAP_se="$(printf '%b' '')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '')"; a="${a%_}"
+
+export PGUSER=postgres
