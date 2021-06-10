@@ -60,4 +60,4 @@ alias diff='diff -u --color=always'
 
 alias vi=nvim
 
-alias drun='docker run --rm -it -v "${PWD}":/app -w /app'
+alias drun='docker run --rm -it -v "$(realpath ${PWD})":/app -w /app'
