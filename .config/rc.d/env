@@ -1,4 +1,4 @@
-EDITOR=vi
+export EDITOR=vi
 
 # Add colors to the less and man commands.
 export LESS=-R
@@ -11,3 +11,8 @@ export LESS_TERMCAP_us="$(printf '%b' '')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '')"; a="${a%_}"
 
 export PGUSER=postgres
+
+export LANGUAGE=de_DE.UTF-8
+export LC_ALL=de_DE.UTF-8
+export LC_TYPE=de_DE.UTF-8
+export LANG=de_DE.UTF-8

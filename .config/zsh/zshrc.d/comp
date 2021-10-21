@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+zstyle :compinstall filename '/home/johannes/.config/zsh/.zshrc'
+
+autoload -Uz compinit
+compinit
