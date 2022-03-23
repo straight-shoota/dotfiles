@@ -52,3 +52,6 @@ VersionX-revision.h
 Backup[ ]of[ ]*.pages/
 Backup[ ]of[ ]*.key/
 Backup[ ]of[ ]*.numbers/
+
+.env
+.vscode/
