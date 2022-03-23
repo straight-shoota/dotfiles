@@ -27,4 +27,4 @@ cmd.exe /S /c "${MSVC_BUILD_TOOLS} amd64 && cd /D %CD% && ${linker_command}"
 
 popd
 
-mv /mnt/d/crystal/*.exe .
+cp /mnt/d/crystal/*.{exe,pdb} .
