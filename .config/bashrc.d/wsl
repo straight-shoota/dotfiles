@@ -9,7 +9,7 @@ if grep -qiE "(Microsoft|WSL)" /proc/version &>/dev/null; then
 
     # Access X-server on Windows (VcXsrv).
     #   Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-    export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
+    # export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
 
     # Configure the Docker CLI to use the Docker for Windows daemon.
     #   Requires: https://docs.docker.com/docker-for-windows/install/
