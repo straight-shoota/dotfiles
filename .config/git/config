@@ -43,15 +43,19 @@
   dc  = diff --cached
   fix = commit --fixup
   force-push = push --force-with-lease
+  glog = log --graph --all --oneline --decorate
   s   = status -sb
   recent = ! git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always | column -ts'|'
   wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+  #local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+  local-branches = "!git for-each-ref --sort --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
+  local-branches = "!git for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)%09%(color:cyan)%(upstream:short)' refs/heads | awk -F'\t' '{if (!$3) print $1 \"\t\" $2;}'"
 
 [log]
   decorate = auto
 
 [pull]
-  rebase = preserve
+	rebase = true
 
 [status]
   branch = true
@@ -64,5 +68,7 @@
   pushInsteadOf = https://github.com/
 
 [gpg]
+	program = gpg2
 [init]
 	templatedir = ~/.config/git/template
+	defaultBranch = master
