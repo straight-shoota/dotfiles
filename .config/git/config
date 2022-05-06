@@ -72,3 +72,5 @@
 [init]
 	templatedir = ~/.config/git/template
 	defaultBranch = master
+[merge]
+	conflictstyle = zdiff3
