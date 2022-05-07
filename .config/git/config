@@ -68,7 +68,7 @@
   pushInsteadOf = https://github.com/
 
 [gpg]
-	program = gpg2
+	program = gpg
 [init]
 	templatedir = ~/.config/git/template
 	defaultBranch = master
