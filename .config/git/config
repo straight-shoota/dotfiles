@@ -46,10 +46,11 @@
   glog = log --graph --all --oneline --decorate
   s   = status -sb
   recent = ! git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always | column -ts'|'
-  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:default)%(if:equals="origin")%(upstream:remotename)%(then)%(color:yellow)%(end)%(if:equals="upstream")%(upstream:remotename)%(then)%(color:brightyellow)%(end)%(refname:short)%(color:default)%(if:notequals="Johannes Müller")%(authorname)%(then) (%(color:blue)%(authorname)%(color:white))%(end) %(color:brightblue)%(upstream:track)%(color:default)' refs/heads
   #local-branches = "!git branch --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
   local-branches = "!git for-each-ref --sort --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
   local-branches = "!git for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)%09%(color:cyan)%(upstream:short)' refs/heads | awk -F'\t' '{if (!$3) print $1 \"\t\" $2;}'"
+  up  = !sh -c 'git push --set-upstream ${1:-origin} ${2:-$(git rev-parse --abbrev-ref HEAD)}' -
 
 [log]
   decorate = auto
