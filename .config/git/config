@@ -20,7 +20,9 @@
   fsckobjects = true
 
 [fetch]
-  fsckobjects = false
+  fsckobjects = true
+  prune = true
+  prunetags = true
 
 [receive]
   fsckobjects = true
@@ -30,6 +32,9 @@
 
 [push]
   default = simple
+
+[rerere]
+  enabled = true
 
 [alias]
   a   = add
@@ -54,6 +59,7 @@
 
 [log]
   decorate = auto
+  date = iso
 
 [pull]
   rebase = true
@@ -63,15 +69,26 @@
 
 [rebase]
   autoSquash = true
+  autoStash = true
 
 [url "git@github.com:"]
   pushInsteadOf = git://github.com/
   pushInsteadOf = https://github.com/
+  insteadOf = "gh:"
 
 [gpg]
   program = gpg
+
 [init]
   templatedir = ~/.config/git/template
   defaultBranch = master
+
 [merge]
   conflictstyle = zdiff3
+  tool = meld
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = taggerdate
