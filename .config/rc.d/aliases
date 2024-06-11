@@ -60,10 +60,20 @@ vdiff () {
     fi
 }
 
-alias diff='diff -u --color=always'
+diff () {
+  command diff -u $@ | ydiff --wrap
+}
+sdiff () {
+  command diff -u $@ | ydiff -s --wrap --width=0
+}
+
 # alias docker=podman
 # alias docker-compose=podman-compose
 
 alias vi=nvim
 
 alias drun='docker run --rm -it -v "$(realpath ${PWD})":/app -w /app'
+
+alias brium='noglob curl -XPOST https://brium.me/api/messages?access_token=$(cat ~/.brium | tr -d "[[:space:]]") -d "$@"'
+
+alias wcr='watchexec --signal=TERM --watch=src/ --emit-events-to=none --clear -- crystal $@'
