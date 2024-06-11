@@ -4,6 +4,26 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+format = """$all\
+$fill\
+$time\
+$line_break\
+$jobs\
+$battery\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+#right_format = """$time"""
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = '%T'
+style = 'dimmed'
+
 [aws]
 symbol = "  "
 
@@ -36,6 +56,9 @@ symbol = " "
 
 [fennel]
 symbol = " "
+
+[fill]
+symbol = ' '
 
 [fossil_branch]
 symbol = " "
@@ -162,6 +185,10 @@ symbol = " "
 
 [scala]
 symbol = " "
+
+[status]
+disabled = false
+map_symbol = true
 
 [swift]
 symbol = " "
