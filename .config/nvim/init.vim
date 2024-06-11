@@ -1,7 +1,7 @@
 set tabstop=2 shiftwidth=2 expandtab
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'datanoise/vim-crystal'
+Plug 'vim-crystal/vim-crystal'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-sensible'
 call plug#end()
