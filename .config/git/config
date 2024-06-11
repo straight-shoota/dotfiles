@@ -49,6 +49,8 @@
   fix = commit --fixup
   force-push = push --force-with-lease
   glog = log --graph --all --oneline --decorate
+  hold = "!sh -c 'git update-ref refs/hold/$1 refs/heads/$1 && \
+          git branch -D $1' -"
   s   = status -sb
   recent = ! git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always | column -ts'|'
   wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:default)%(if:equals="origin")%(upstream:remotename)%(then)%(color:yellow)%(end)%(if:equals="upstream")%(upstream:remotename)%(then)%(color:brightyellow)%(end)%(refname:short)%(color:default)%(if:notequals="Johannes Müller")%(authorname)%(then) (%(color:blue)%(authorname)%(color:white))%(end) %(color:brightblue)%(upstream:track)%(color:default)' refs/heads
