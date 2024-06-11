@@ -1,10 +1,10 @@
 [core]
-  autocrlf = false 
+  autocrlf = false
   # fileMode = false
   whitespace = space-before-tab,trailing-space
 
 [user]
-	email = straightshoota@gmail.com
+  email = straightshoota@gmail.com
   name = Johannes Müller
   signingkey = F0F349637AC5087A
 
@@ -17,13 +17,13 @@
   tool = meld
 
 [transfer]
-	fsckobjects = true
+  fsckobjects = true
 
 [fetch]
-	fsckobjects = false
+  fsckobjects = false
 
 [receive]
-	fsckobjects = true
+  fsckobjects = true
 
 [commit]
   gpgsign = true
@@ -56,7 +56,7 @@
   decorate = auto
 
 [pull]
-	rebase = true
+  rebase = true
 
 [status]
   branch = true
@@ -69,9 +69,9 @@
   pushInsteadOf = https://github.com/
 
 [gpg]
-	program = gpg
+  program = gpg
 [init]
-	templatedir = ~/.config/git/template
-	defaultBranch = master
+  templatedir = ~/.config/git/template
+  defaultBranch = master
 [merge]
-	conflictstyle = zdiff3
+  conflictstyle = zdiff3
