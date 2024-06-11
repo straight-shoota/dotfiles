@@ -58,6 +58,9 @@
   local-branches = "!git for-each-ref --sort --format '%(refname:short) %(upstream:short)' | awk '{if (!$2) print $1;}'"
   local-branches = "!git for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)%09%(color:cyan)%(upstream:short)' refs/heads | awk -F'\t' '{if (!$3) print $1 \"\t\" $2;}'"
   up  = !sh -c 'git push --set-upstream ${1:-origin} ${2:-$(git rev-parse --abbrev-ref HEAD)}' -
+  grep-branch        = "!f(){ git branch -a | sed -e 's/[ \\*]*//' | grep -v -e '\\->' | xargs git grep $@; };f "
+  grep-branch-remote = "!f(){ git branch -a | sed -e 's/[ \\]]*//' | grep -v -e '\\->' | grep '^remotes' | xargs git grep $@; };f"
+  grep-branch-local  = "!f(){ git branch -a | sed -e 's/[ \\*]*//' | grep -v -e '\\->' -e '^remotes' | xargs git grep $@;  };f "
 
 [log]
   decorate = auto
