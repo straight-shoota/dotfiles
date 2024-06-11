@@ -35,3 +35,5 @@ if [ -d $HOME/.config/bashrc.d/ ]; then
     source "$file"
   done
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -26,3 +26,6 @@ if [ -d ${ZDOTDIR:-$HOME}/zshrc.d/ ]; then
   done
 fi
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
