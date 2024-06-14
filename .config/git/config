@@ -97,3 +97,6 @@
 
 [tag]
   sort = taggerdate
+
+[includeIf "gitdir/i:C:/"]
+  path = ~/.config/git/config-windows
