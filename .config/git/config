@@ -68,6 +68,10 @@
   grep-branch-remote = "!f(){ git branch -a | sed -e 's/[ \\]]*//' | grep -v -e '\\->' | grep '^remotes' | xargs git grep $@; };f"
   grep-branch-local  = "!f(){ git branch -a | sed -e 's/[ \\*]*//' | grep -v -e '\\->' -e '^remotes' | xargs git grep $@;  };f "
 
+  # https://adamj.eu/tech/2022/10/27/git-how-to-alias-master-as-main/
+  alias-main-as-master = !git symbolic-ref refs/heads/master refs/heads/main && git symbolic-ref refs/remotes/origin/master refs/remotes/origin/main
+  alias-master-as-main = !git symbolic-ref refs/heads/main refs/heads/master && git symbolic-ref refs/remotes/origin/main refs/remotes/origin/master
+
 [log]
   decorate = auto
   date = iso
