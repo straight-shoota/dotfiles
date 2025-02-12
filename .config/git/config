@@ -85,6 +85,7 @@
 [rebase]
   autoSquash = true
   autoStash = true
+  updateRefs = true
 
 [url "git@github.com:"]
   pushInsteadOf = git://github.com/
