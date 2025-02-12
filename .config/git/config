@@ -2,6 +2,7 @@
   autocrlf = false
   # fileMode = false
   whitespace = space-before-tab,trailing-space
+  pager = delta
 
 [user]
   email = straightshoota@gmail.com
@@ -15,6 +16,11 @@
   mnemonicprefix = true
   submodule = log
   tool = meld
+  colormoved = "default"
+  colormovedws = "allow-indentation-change"
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive,decorations
 
 [transfer]
   fsckobjects = true
@@ -100,3 +106,20 @@
 
 [includeIf "gitdir/i:C:/"]
   path = ~/.config/git/config-windows
+
+[delta]
+  features = decorations
+
+[delta "interactive"]
+#  keep-plus-minus-markers = false
+  side-by-side = true
+
+[delta "decorations"]
+  line-numbers = true
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = omit #yellow box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax #yellow ul
