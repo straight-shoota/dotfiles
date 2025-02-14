@@ -77,3 +77,5 @@ alias drun='docker run --rm -it -v "$(realpath ${PWD})":/app -w /app'
 alias brium='noglob curl -XPOST https://brium.me/api/messages?access_token=$(cat ~/.brium | tr -d "[[:space:]]") -d "$@"'
 
 alias wcr='watchexec --signal=TERM --watch=src/ --emit-events-to=none --clear -- crystal $@'
+
+alias lddtree='libree'
