@@ -81,6 +81,7 @@ plugins=(
   dotenv
   gh
   git
+  ssh-agent
   zoxide
 )
 
