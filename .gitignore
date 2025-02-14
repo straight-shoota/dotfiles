@@ -1,16 +1,15 @@
-/.dotfiles
-/.bundle
-/.cache
-/.npm
-/.ssh/id_*
+.zcompdump*
 /.aws
 /.azure
 /.bash_history
 /.bash_logout
+/.bundle
+/.cache
 /.ccnet
 /.circleci
 /.cpan
 /.docker
+/.dotfiles
 /.gem
 /.gilt
 /.histfile
@@ -22,6 +21,7 @@
 /.motd_shown
 /.nix-*
 /.node-gyp
+/.npm
 /.osc.cookejar
 /.osc.projects
 /.parallel
@@ -31,6 +31,7 @@
 /.shard_land
 /.ssh-ident
 /.ssh/agents
+/.ssh/id_*
 /.ssh/known_hosts*
 /.sudo_as_admin_successful
 /.tig_history
@@ -40,4 +41,3 @@
 /.vscode-server
 /.wget-hsts
 /.yarnrc
-.zcompdump*
