@@ -1,3 +1,8 @@
+*.bak
+*.ll
+*.o
+*.s
+
 .zcompdump*
 /.aws
 /.azure
@@ -8,8 +13,11 @@
 /.ccnet
 /.circleci
 /.cpan
+/.devenv
 /.docker
 /.dotfiles
+/.direnv
+/.env
 /.gem
 /.gilt
 /.histfile
@@ -25,6 +33,7 @@
 /.osc.cookejar
 /.osc.projects
 /.parallel
+/.pre-commit-config.yaml
 /.psql_history-*
 /.python_history
 /.rubies
@@ -38,6 +47,8 @@
 /.tmux
 /.units_history
 /.viminfo
+/.venv
 /.vscode-server
+/.vscode/
 /.wget-hsts
 /.yarnrc
