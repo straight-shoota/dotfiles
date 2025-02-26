@@ -4,6 +4,9 @@
   whitespace = space-before-tab,trailing-space
   pager = delta
 
+[column]
+  ui = auto
+
 [user]
   email = straightshoota@gmail.com
   name = Johannes Müller
@@ -16,7 +19,7 @@
   mnemonicprefix = true
   submodule = log
   tool = meld
-  colormoved = "default"
+  colormoved = zebra
   colormovedws = "allow-indentation-change"
 
 [interactive]
@@ -35,12 +38,15 @@
 
 [commit]
   gpgsign = true
+  verbose = true
 
 [push]
   default = simple
+  autoSetupRemote = true
 
 [rerere]
   enabled = true
+  autoupdate = true
 
 [alias]
   a   = add
@@ -107,7 +113,7 @@
   sort = -committerdate
 
 [tag]
-  sort = taggerdate
+  sort = version:refname
 
 [includeIf "gitdir/i:C:/"]
   path = ~/.config/git/config-windows
