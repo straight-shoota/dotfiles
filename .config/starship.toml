@@ -5,6 +5,18 @@
 add_newline = true
 
 format = """$os\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+${custom.github_pr}\
 $all\
 $fill\
 $time\
@@ -199,3 +211,11 @@ symbol = " "
 
 [zig]
 symbol = " "
+
+[custom.github_pr]
+command = "git-pr-info"
+detect_folders = [".git"]
+
+[custom.github_pr_status]
+command = "git-pr-status"
+detect_folders = [".git"]
