@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+## List current branches in the git repo
+##
+## Usage:
+##
+##    git wip
+##
+
+set -euo pipefail
+
+#. ~/bin/git-functions.sh
+git-print-pr(){
+  if [ -z "${GITHUB_REPO:-}" ]; then
+    upstream_url=$(git config remote.upstream.url)
+    GITHUB_REPO=${upstream_url#*:}
+  fi
+
+  if [ $# -gt 0 ]; then
+    branch=$1
+  else
+    branch=$(git branch --show-current)
+  fi
+
+  pr="$(git config branch.${branch}.pr || :)"
+
+  if [ ! -z "${pr}" ]; then
+    printf "\e[0;92m\e]8;;https://github.com/${GITHUB_REPO}/issues/${pr}\e\\#${pr}\e]8;;\e\\"
+    printf "\e[0m "
+  fi
+
+  issue="$(git config branch.${branch}.issue || :)"
+
+  if [ ! -z "${issue}" ]; then
+    printf "\e[0;32m\e]8;;https://github.com/${GITHUB_REPO}/issues/${issue}\e\\#${issue}\e]8;;\e\\"
+    printf "\e[0m "
+  fi
+
+  depends="$(git config branch.${branch}.depends || :)"
+
+  if [ ! -z "${depends}" ]; then
+    printf "\e[0;31m ${depends}\e[0m "
+  fi
+}
+
+upstream_url=$(git config remote.upstream.url)
+GITHUB_REPO=${upstream_url#*:}
+export GITHUB_REPO
+
+git wip-all | while read line; do
+  branch="${line#*$'\t'}"
+  branch="${branch%% *}"
+  branch="$(echo "$branch" | sed -e "s/\x1b\[.\{1,5\}m//g")"
+
+  echo "${line} $(git-print-pr ${branch})"
+done

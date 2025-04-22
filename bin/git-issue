@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+## Add Issue tracking information to a git branch
+##
+## Usage:
+##
+##    git issue [[<branch>] <PR/issue number>]
+##
+
+set -euo pipefail
+
+if [ $# -eq 2 ]; then
+  branch=$1
+  number=$2
+elif [ $# -eq 1 ]; then
+  number=$1
+  branch=$(git branch --show-current)
+elif [ $# -eq 0 ]; then
+  git config "branch.$(git branch --show-current).issue"
+  exit 0
+else
+  exit 1
+fi
+
+# strip leading hashtag (if any)
+number=${number#\#}
+
+[ -z "${number}" ] && exit 1
+
+git config "branch.${branch}.issue" "$number"

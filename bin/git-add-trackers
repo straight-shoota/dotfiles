@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+## Add missing PR tracking information to git branches
+##
+## Usage:
+##
+##    git add-trackers [<branch>]
+##
+
+set -euo pipefail
+
+git for-each-ref --exclude=refs/heads/master --exclude='refs/heads/release/*' --format='%(refname:short) %(upstream:short)' refs/heads | while read line; do
+  branch="${line% *}"
+  remote_branch="${line#* }"
+  if [ "$branch" == "$remote_branch" ]; then
+    continue
+  fi
+
+  git config branch.$branch.pr && continue
+
+  case "${remote_branch}" in
+    origin/*)
+      remote="straight-shoota:"
+    ;;
+    upstream/*)
+      remote=""
+    ;;
+    *)
+      continue
+  esac
+
+  number="$(gh pr view $remote$branch --json number -q '.number' || :)"
+  #number="$(gh pr view $remote$branch --json number,state --jq '"\( .number ) \( .state )"' || :)"
+
+  [ -z "$number" ] && continue
+
+  git-track "$branch" "$number"
+done
