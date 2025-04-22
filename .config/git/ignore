@@ -56,3 +56,4 @@ Backup[ ]of[ ]*.numbers/
 .env
 .vscode/
 .direnv/
+.devenv/
