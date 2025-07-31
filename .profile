@@ -22,3 +22,4 @@ if [ -d $HOME/.config/loginrc.d ]; then
     source $file
   done
 fi
+. "$HOME/.cargo/env"
