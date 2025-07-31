@@ -10,26 +10,29 @@
 set -euo pipefail
 
 if [ $# -eq 2 ]; then
-  branch=$1
-  number=$2
+	branch=$1
+	number=$2
 elif [ $# -eq 1 ]; then
-  number=$1
-  branch=$(git branch --show-current)
+	number=$1
+	branch=$(git branch --show-current)
 else
-  branch=$(git branch --show-current)
-  remote=$(git config branch.$branch.remote)
+	branch=$(git branch --show-current)
+	remote=$(git config branch.$branch.remote)
 
-  case "${remote}" in
-    origin)
-      remote="straight-shoota:"
-    ;;
-    upstream)
-      remote=""
-    ;;
-    *)
-  esac
+	case "${remote}" in
+	origin)
+		remote="straight-shoota:"
+		;;
+	upstream)
+		remote=""
+		;;
+	*)
+		r="${remote//\/*/}"
+		remote="${r##*:}:"
+		;;
+	esac
 
-  number=$(gh pr view $remote$branch --json number -q '.number' || :)
+	number=$(gh pr view $remote$branch --json number -q '.number' || :)
 fi
 
 # strip leading hashtag (if any)

@@ -43,11 +43,23 @@ git-print-pr(){
   fi
 }
 
-upstream_url=$(git config remote.upstream.url)
+upstream_url=$(git config remote.upstream.url || git config remote.origin.url)
 GITHUB_REPO=${upstream_url#*:}
 export GITHUB_REPO
 
-git wip-all | while read line; do
+limit=35
+for arg in "$@"; do
+    case $arg in
+        --all)
+            limit=""
+            shift # Remove --all from arguments
+            ;;
+        *)
+            ;;
+    esac
+done
+
+git wip-all | { [ -z "$limit" ] && cat || tail -n $limit; } | while read line; do
   branch="${line#*$'\t'}"
   branch="${branch%% *}"
   branch="$(echo "$branch" | sed -e "s/\x1b\[.\{1,5\}m//g")"
