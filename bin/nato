@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+declare -A DICTIONARY=(
+  [a]="Alfa" [b]="Bravo" [c]="Charlie" [d]="Delta" [e]="Echo"
+  [f]="Foxtrot" [g]="Golf" [h]="Hotel" [i]="India" [j]="Juliett"
+  [k]="Kilo" [l]="Lima" [m]="Mike" [n]="November" [o]="Oscar"
+  [p]="Papa" [q]="Quebec" [r]="Romeo" [s]="Sierra" [t]="Tango"
+  [u]="Uniform" [v]="Victor" [w]="Whiskey" [x]="X-ray" [y]="Yankee" [z]="Zulu"
+  [1]="One" [2]="Two" [3]="Three" [4]="Four" [5]="Five"
+  [6]="Six" [7]="Seven" [8]="Eight" [9]="Nine" [0]="Zero"
+)
+
+# Join all arguments into a single string
+input="$*"
+
+# Split input into words
+for word in $input; do
+  output=""
+  # Loop over each character in the word
+  for (( i=0; i<${#word}; i++ )); do
+    char="${word:i:1}"
+    lower=$(echo "$char" | tr '[:upper:]' '[:lower:]')
+    # Look up in dictionary; fallback to original char
+    if [[ -n "${DICTIONARY[$lower]}" ]]; then
+      output+="${DICTIONARY[$lower]} "
+    else
+      output+="$char "
+    fi
+  done
+  echo "$output"
+done

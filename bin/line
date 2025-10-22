@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+set -u
+
+head -n "$1" | tail -n 1
+
+

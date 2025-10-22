@@ -37,6 +37,7 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Git aliases
 alias gaa='git add --all'
 alias gc='git commit'
+alias gc!='git commit --amend --verbose'
 alias gca='git commit --amend --date="$(date)"'
 alias gcf='git commit --fixup'
 
@@ -79,3 +80,20 @@ alias brium='noglob curl -XPOST https://brium.me/api/messages?access_token=$(cat
 alias wcr='watchexec --signal=TERM --watch=src/ --emit-events-to=none --clear -- crystal $@'
 
 alias lddtree='libree'
+
+function mkcd() {
+  mkdir -p "$1"
+  cd "$1"
+  ls -A -l | tail -n+2
+}
+
+function tempe() {
+  cd "$(mktemp -d)"
+  chmod -R 0700 .
+  if [[ $# -eq 1 ]]; then
+    \mkdir -p "$1"
+    cd "$1"
+    chmod -R 0700 .
+  fi
+}
+
