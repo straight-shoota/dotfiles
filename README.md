@@ -7,7 +7,7 @@ My dotfiles
 
 ```console
 $ cd $HOME
-$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+$ alias dotfiles="$(which git) --git-dir=\$HOME/.dotfiles/ --work-tree=\$HOME"
 $ mkdir .dotfiles
 $ dotfiles init
 Initialized empty Git repository in /home/johannes/.dotfiles/
