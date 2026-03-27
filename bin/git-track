@@ -21,7 +21,11 @@ else
 
 	case "${remote}" in
 	origin)
-		remote="straight-shoota:"
+		if git remote get-url upstream &> /dev/null; then
+			remote="straight-shoota:"
+		else
+			remote=""
+		fi
 		;;
 	upstream)
 		remote=""
