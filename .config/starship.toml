@@ -202,6 +202,14 @@ symbol = " "
 [scala]
 symbol = " "
 
+[shlvl]
+disabled = false
+threshold = 3
+format = '[$symbol]($style) '
+symbol = ">"
+repeat = true
+repeat_offset = 2
+
 [status]
 disabled = false
 map_symbol = true
