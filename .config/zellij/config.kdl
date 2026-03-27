@@ -45,8 +45,8 @@ keybinds clear-defaults=true {
         bind "l" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-        bind "Ctrl t" { SwitchToMode "normal"; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; } // Switched from `Ctrl t` which conflicts with fzf
+        bind "Ctrl ü" { SwitchToMode "normal"; }
         bind "x" { CloseTab; SwitchToMode "normal"; }
         bind "tab" { ToggleTab; }
     }
@@ -127,7 +127,7 @@ keybinds clear-defaults=true {
         bind "Alt =" { Resize "Increase"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Ctrl Alt f" { ToggleFloatingPanes; } // Switched from `Alt f` which conflicts with shell word skipping
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt i" { MoveTab "left"; }
@@ -151,7 +151,7 @@ keybinds clear-defaults=true {
         bind "Ctrl s" { SwitchToMode "scroll"; }
     }
     shared_except "locked" "tab" {
-        bind "Ctrl t" { SwitchToMode "tab"; }
+        bind "Ctrl ü" { SwitchToMode "tab"; } // Switched from `Ctrl t` which conflicts with fzf
     }
     shared_except "locked" "pane" {
         bind "Ctrl p" { SwitchToMode "pane"; }
