@@ -1,4 +1,54 @@
-#! /bin/sh
-branch=${1:-origin}
-git remote prune ${branch}
-git branch -vv | grep -E "${branch}/.*: (gone|entfernt)]" | awk '{print $1}' | xargs git branch -D
+#!/usr/bin/env bash
+set -euo pipefail
+
+# git remote prune origin upstream
+
+# Get all remote branches that still exist
+existing_remote_branches=$(git branch -r | sed 's/^ *//' | grep -E '^(origin|upstream)/')
+
+# Get all upstreams referenced by local branches
+local_with_upstream=$(git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads)
+
+deleted_branches=()
+
+while read -r branch upstream; do
+  if [[ -n "$upstream" ]]; then
+    # If upstream is not listed among existing remote branches → it's deleted
+    if ! grep -qx "$upstream" <<< "$existing_remote_branches"; then
+      deleted_branches+=("$branch:$upstream")
+    fi
+  fi
+done <<< "$local_with_upstream"
+
+if [[ ${#deleted_branches[@]} -eq 0 ]]; then
+  echo "No locally-tracked branches with deleted upstreams."
+  exit 0
+fi
+
+for entry in "${deleted_branches[@]}"; do
+  local_branch="${entry%%:*}"
+  upstream_branch="${entry##*:}"
+
+  echo "$local_branch [$(git rev-parse --short "$local_branch")]"
+
+  git branch --contains "$local_branch" | grep -v "^\s*$local_branch\$" || echo -e "  \e[3mNo other local branch contains this branch\e[0m"
+
+  git branch -r --contains "$local_branch" | grep -v "^\s(upstream|origin)/$local_branch\$" || true
+
+  echo
+done
+
+read -p "Delete all of the above branches? [Y/n]: " confirm
+confirm=${confirm:-Y}  # Default to Y if empty
+
+if ! [[ "$confirm" =~ ^[Yy]$ ]]; then
+    echo "Aborted. No branches have been deleted."
+    exit 1
+fi
+
+for entry in "${deleted_branches[@]}"; do
+  local_branch="${entry%%:*}"
+  git branch -D "$local_branch" || {
+    echo "Could not safe-delete $local_branch (not merged). Use -D if you want to force."
+  }
+done
